@@ -39,6 +39,7 @@ packages:
       - packages/ota_feedback.yaml
       - packages/activate_preset_svc.yaml
     refresh: 0s
+  wifi_fallback: !include ../../common/wifi_fallback.yaml
 
 
 # --------------------------------------------------------------------------
@@ -55,23 +56,6 @@ api:
 
 ota:
   password: !secret ota_password
-
-
-# Enable logging
-logger:
-
-  ap:
-    ssid: "otspot.mi_lamp2"
-    password: "jEvC7RTUNb7X"
-
-
-# Enable Home Assistant API
-api:
-  password: !secret api_password
-
-ota:
-  password: !secret ota_password
-
 
 # Enable logging
 logger:

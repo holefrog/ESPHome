@@ -1,0 +1,83 @@
+substitutions:
+  hostname: 'backlit_frame'
+  name: 'backlit_frame'
+  delay_time: 60s
+
+packages:
+  wifi_fallback: !include ../../common/wifi_fallback.yaml
+
+esphome:
+  name: '${name}'
+  name_add_mac_suffix: true
+
+
+# Board
+esp8266:
+  board: esp01_1m
+  framework:
+    version: recommended
+
+
+# WiFi
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  password: !secret ota_password
+
+
+
+# Enable logging
+logger:
+
+
+
+# Begin
+
+switch:
+  - platform: gpio
+    pin: GPIO0
+    id: gpio_0
+    name: '$hostname Light'
+    inverted: true
+
+  - platform: restart
+    name: '$hostname restart'
+
+script:
+  - id: pir_timer
+    mode: restart
+    then:
+      - switch.turn_on: gpio_0
+      - delay: ${delay_time}
+      - switch.turn_off: gpio_0
+
+sensor:
+  - platform: wifi_signal
+    name: '$hostname WiFi Signal'
+    update_interval: 60s
+
+binary_sensor:
+  - platform: status
+    name: '$hostname status'
+
+  # pullup: false. Make sure PIR input is low when not detected.
+  - platform: gpio
+    name: '$hostname PIR'
+    id: 'thisPIR'
+    device_class: motion
+    pin: 
+      number: GPIO3
+      mode:
+        input: true
+        pullup: false
+    on_press:
+      then:
+        - script.execute: pir_timer
