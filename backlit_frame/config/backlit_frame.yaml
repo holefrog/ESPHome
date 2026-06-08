@@ -1,5 +1,5 @@
 substitutions:
-  name: 'backlit_frame'
+  name: 'backlit-frame'
   friendly_name: 'Backlit Frame'
   delay_time: 60s
 
