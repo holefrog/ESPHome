@@ -36,18 +36,26 @@ ESPHome/
 
 ### 安装 ESPHome CLI
 如果你需要在本地主机上编译固件并刷机，需要先安装 ESPHome。
-推荐使用 `pipx`（在 Linux 环境下隔离安装 Python 应用）：
+推荐在项目目录中使用 Python 虚拟环境（`venv`）：
 ```bash
-# 1. 安装 pipx (如果尚未安装)
-sudo apt install pipx
+# 1. 安装 venv 支持 (如果尚未安装)
+sudo apt install python3-venv
 
-# 2. 安装 esphome
-pipx install esphome
+# 2. 创建并激活项目虚拟环境
+python3 -m venv .venv
+source .venv/bin/activate
 
-# 3. 验证安装
+# 3. 安装 esphome
+pip install esphome
+
+# 4. 验证安装
 esphome version
 ```
-*(注意：也可以使用 Docker 或传统的 Python `pip install esphome` 进行安装)*
+之后每次打开新的终端并使用 `esphome` 前，需要先在仓库根目录运行：
+```bash
+source .venv/bin/activate
+```
+*(注意：也可以使用 Docker 或 `pipx` 进行安装)*
 
 
 ### Secrets 隐私管理
@@ -91,4 +99,3 @@ esphome run bedside_lamp/config/bedside-lamp.yaml
 esphome run backlit_frame/config/backlit_frame.yaml
 ```
 ESPHome 会自动编译固件，并在询问刷机方式时，自动检测到局域网内的设备（或者你直接选择网络/OTA选项）。只要你的 `secrets.yaml` 中配置的 `ota_password` 正确，固件就会通过 Wi-Fi 推送到设备中。
-
