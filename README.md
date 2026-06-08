@@ -34,6 +34,22 @@ ESPHome/
 
 ## ⚙️ 设置与编译
 
+### 安装 ESPHome CLI
+如果你需要在本地主机上编译固件并刷机，需要先安装 ESPHome。
+推荐使用 `pipx`（在 Linux 环境下隔离安装 Python 应用）：
+```bash
+# 1. 安装 pipx (如果尚未安装)
+sudo apt install pipx
+
+# 2. 安装 esphome
+pipx install esphome
+
+# 3. 验证安装
+esphome version
+```
+*(注意：也可以使用 Docker 或传统的 Python `pip install esphome` 进行安装)*
+
+
 ### Secrets 隐私管理
 为了避免在各个配置文件中重复填写敏感信息（如 WiFi 密码和 API 密钥），并确保它们不会被意外提交到 Git，本项目在根目录下使用了一个集中的 `secrets.yaml` 文件。
 
@@ -57,12 +73,22 @@ ESPHome/
    ```
    *注意: Git 的 `.gitignore` 文件中已经包含了 `secrets*`，这会阻止这些文件或软链接被 Git 追踪。*
 
-### 编译和刷机
-成功链接 secrets 文件后，你可以使用 ESPHome CLI 进行编译和上传：
+### 编译和刷机 (首次 USB 刷入)
+对于全新设备，首次刷机需要通过 USB 串口连接电脑：
 ```bash
-# 编译并运行背光画框
+# 编译并选择 USB 端口刷入背光画框
 esphome run backlit_frame/config/backlit_frame.yaml
 
-# 编译并运行床头灯
+# 编译并选择 USB 端口刷入床头灯
 esphome run bedside_lamp/config/bedside-lamp.yaml
 ```
+
+### 无线 OTA 升级 (Over-The-Air)
+当设备首次刷入固件并成功连接到 Wi-Fi 后，后续的任何配置修改和固件升级都可以直接通过无线网络 (OTA) 完成，无需再连接 USB 线。
+
+只需像往常一样运行 `run` 命令：
+```bash
+esphome run backlit_frame/config/backlit_frame.yaml
+```
+ESPHome 会自动编译固件，并在询问刷机方式时，自动检测到局域网内的设备（或者你直接选择网络/OTA选项）。只要你的 `secrets.yaml` 中配置的 `ota_password` 正确，固件就会通过 Wi-Fi 推送到设备中。
+
