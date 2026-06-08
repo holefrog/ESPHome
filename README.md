@@ -98,4 +98,10 @@ esphome run bedside_lamp/config/bedside-lamp.yaml
 ```bash
 esphome run backlit_frame/config/backlit_frame.yaml
 ```
-ESPHome 会自动编译固件，并在询问刷机方式时，自动检测到局域网内的设备（或者你直接选择网络/OTA选项）。只要你的 `secrets.yaml` 中配置的 `ota_password` 正确，固件就会通过 Wi-Fi 推送到设备中。
+ESPHome 会自动编译固件，并在询问刷机方式时，自动检测到局域网内的设备（或者你直接选择网络/OTA 选项）。
+
+如果自动发现失败，或者你想明确指定目标设备，可以加上设备 IP：
+```bash
+esphome run backlit_frame/config/backlit_frame.yaml --device 192.168.1.50
+```
+将 `192.168.1.50` 替换为实际设备 IP。只要你的 `secrets.yaml` 中配置的 `ota_password` 正确，固件就会通过 Wi-Fi 推送到设备中。
