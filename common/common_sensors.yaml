@@ -1,0 +1,21 @@
+sensor:
+  - platform: wifi_signal
+    name: '${name} WiFi Signal'
+    update_interval: 60s
+  - platform: uptime
+    name: '${name} Uptime'
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: '${name} IP Address'
+    ssid:
+      name: '${name} SSID'
+    bssid:
+      name: '${name} BSSID'
+    mac_address:
+      name: '${name} MAC Address'
+
+binary_sensor:
+  - platform: status
+    name: '${name} Status'
