@@ -12,10 +12,6 @@ packages:
   wifi_fallback: !include ../../common/wifi_fallback.yaml
   common_sensors: !include ../../common/common_sensors.yaml
 
-ota:
-  - platform: esphome
-    password: !secret ota_password
-
 # Board
 esp8266:
   board: esp01_1m
