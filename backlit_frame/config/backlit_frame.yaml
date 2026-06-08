@@ -1,7 +1,11 @@
 substitutions:
-  hostname: 'backlit_frame'
   name: 'backlit_frame'
+  friendly_name: 'Backlit Frame'
   delay_time: 60s
+
+esphome:
+  name: '${name}'
+  name_add_mac_suffix: true
 
 packages:
   base_config: !include ../../common/base_config.yaml
@@ -15,20 +19,17 @@ esp8266:
     version: recommended
 
 
-
-
-
 # Begin
 
 switch:
   - platform: gpio
     pin: GPIO0
     id: gpio_0
-    name: '$hostname Light'
+    name: '${friendly_name} Light'
     inverted: true
 
   - platform: restart
-    name: '$hostname restart'
+    name: '${friendly_name} Restart'
 
 script:
   - id: pir_timer
@@ -42,7 +43,7 @@ script:
 binary_sensor:
   # pullup: false. Make sure PIR input is low when not detected.
   - platform: gpio
-    name: '$hostname PIR'
+    name: '${friendly_name} PIR'
     id: 'thisPIR'
     device_class: motion
     pin: 

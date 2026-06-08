@@ -31,6 +31,9 @@ substitutions:
 
 packages:
   base_config: !include ../../common/base_config.yaml
+  wifi_fallback: !include ../../common/wifi_fallback.yaml
+  common_sensors: !include ../../common/common_sensors.yaml
+
   bslamp2:
     url: https://github.com/mmakaay/esphome-xiaomi_bslamp2
     ref: dev
@@ -40,8 +43,6 @@ packages:
       - packages/ota_feedback.yaml
       - packages/activate_preset_svc.yaml
     refresh: 0s
-  wifi_fallback: !include ../../common/wifi_fallback.yaml
-  common_sensors: !include ../../common/common_sensors.yaml
 
 
 # --------------------------------------------------------------------------
