@@ -9,8 +9,6 @@ esphome:
 
 esp32:
   board: esp-wrover-kit
-  psram:
-    mode: octal
   framework:
     type: arduino
 
@@ -19,14 +17,19 @@ packages:
   wifi_fallback: !include ../../common/wifi_fallback.yaml
   common_sensors: !include ../../common/common_sensors.yaml
 
+psram:
+
+i2c:
+  - id: i2c_cam
+    sda: GPIO26
+    scl: GPIO27
+
 esp32_camera:
   external_clock:
     pin: GPIO21
     frequency: 20MHz
 
-  i2c_pins:
-    sda: GPIO26
-    scl: GPIO27
+  i2c_id: i2c_cam
   data_pins: [GPIO4, GPIO5, GPIO18, GPIO19, GPIO36, GPIO39, GPIO34, GPIO35]
   vsync_pin: GPIO25
   href_pin: GPIO23
@@ -34,10 +37,10 @@ esp32_camera:
 
   # Image settings
   name: '$name Camera'
-  resolution: 800X600
-  jpeg_quality: 25  # best 10 to poorest 63
-  max_framerate: 8.0fps
-  idle_framerate: 0.1fps
+  resolution: 640X480
+  jpeg_quality: 20  # best 10 to poorest 63
+  max_framerate: 15.0fps
+  idle_framerate: 2.0fps
   vertical_flip: false
   horizontal_mirror: false
 
@@ -84,4 +87,3 @@ binary_sensor:
               - switch.turn_on: transistor_base
             else:
               - switch.turn_off: transistor_base
-
