@@ -40,7 +40,7 @@ esp32_camera:
   resolution: 640X480
   jpeg_quality: 20  # best 10 to poorest 63
   max_framerate: 15.0fps
-  idle_framerate: 2.0fps
+  idle_framerate: 1.0fps
   vertical_flip: false
   horizontal_mirror: false
 
