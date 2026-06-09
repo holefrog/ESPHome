@@ -1,14 +1,16 @@
 ---
 substitutions:
-  hostname: 'stair-closet-camera'
+  name: 'stair-closet-camera'
   friendly_name: 'Stair Closet Camera'
 
 esphome:
-  name: $hostname
+  name: $name
   name_add_mac_suffix: true
 
 esp32:
-  board: esp32dev
+  board: esp-wrover-kit
+  psram:
+    mode: octal
   framework:
     type: arduino
 
@@ -19,23 +21,22 @@ packages:
 
 esp32_camera:
   external_clock:
-    pin: GPIO0
+    pin: GPIO21
     frequency: 20MHz
 
   i2c_pins:
     sda: GPIO26
     scl: GPIO27
-  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  data_pins: [GPIO4, GPIO5, GPIO18, GPIO19, GPIO36, GPIO39, GPIO34, GPIO35]
   vsync_pin: GPIO25
   href_pin: GPIO23
   pixel_clock_pin: GPIO22
-  power_down_pin: GPIO32
 
   # Image settings
-  name: '$hostname Camera'
-  resolution: 1600X1200
-  jpeg_quality: 10  # best 10 to poorest 63
-  max_framerate: 10.0fps
+  name: '$name Camera'
+  resolution: 800X600
+  jpeg_quality: 25  # best 10 to poorest 63
+  max_framerate: 8.0fps
   idle_framerate: 0.1fps
   vertical_flip: false
   horizontal_mirror: false
@@ -47,39 +48,27 @@ esp32_camera:
 # https://esphome.io/guides/faq.html#why-am-i-getting-a-warning-about-strapping-pins
 
 output:
-  # White LED
   - platform: gpio
     pin:
-      number: GPIO4
-    id: white_led
-
-  # Red status light
-  - platform: gpio
-    pin:
-      number: GPIO33
-      inverted: true
-    id: red_led
+      number: GPIO02
+      inverted: false
+    id: blue_led
 
 light:
-  - platform: monochromatic
-    output: white_led
-    name: '$hostname White LED'
-
   - platform: binary
-    output: red_led
-    name: '$hostname Red LED'
-
+    output: blue_led
+    name: '$name Blue LED'
 switch:
   # Transistor Base
   - platform: gpio
     pin:
       number: 13
-      id: transistor_base
-      name: '$hostname Transistor Base'
+    id: transistor_base
+    name: '$name Transistor Base'
 
 binary_sensor:
   - platform: gpio
-    name: '$hostname Door Sensor'
+    name: '$name Door Sensor'
     id: 'door_sensor'
     device_class: door
     pin:
