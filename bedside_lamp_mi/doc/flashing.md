@@ -1,63 +1,59 @@
-Flash Guide
-[https://github.com/mmakaay/esphome-xiaomi_bslamp2/blob/dev/doc/flashing.md#solder-wires-to-the-board]
+# 刷机指南
+
+参考链接: [https://github.com/mmakaay/esphome-xiaomi_bslamp2/blob/dev/doc/flashing.md#solder-wires-to-the-board]
 
 
-# Connection
-Soldering point <-->	Serial USB Adapter name
-GND 	GND
-TX 	    RX
-RX 	    TX (3.3V)
-GPIO0 	GND (temporaryly when boot)
+## 1. 连接方法
+引脚/焊点 <--> USB 转串口模块
+- GND   <--> GND
+- TX    <--> RX
+- RX    <--> TX (需 3.3V 逻辑电平)
+- GPIO0 <--> GND (仅在启动时临时接地)
 
 
-# Port
-/dev/ttyUSB0 is the port of the USB adaper on Linux. You can find what port is used by the adapter by running dmesg after plugging in the USB device. 
+## 2. 串口说明
+在 Linux 系统中，USB 串口模块通常显示为 `/dev/ttyUSB0`。
+插入 USB 设备后，可以通过运行 `dmesg` 命令来查找实际的端口号。
 
 
-# Check port
-1. connect  
-````
+## 3. 查看串口 (TTL)
+1. 连接后运行：
+```bash
 sudo putty /dev/ttyUSB0 -serial -sercfg 115200,8,n,1,N 
 ```
-
-2. plug in the lamp's power supply to boot up the lamp. 
-And see the log
+2. 接通台灯电源启动台灯，并查看日志输出。
 
 
+## 4. 进入刷机模式 (Flash Mode)
+为了能够刷写台灯，在台灯启动时必须将 GPIO0 连接到 GND。
 
-# Enter flash mode
-To be able to flash the lamp, GPIO0 must be connected to ground while the lamp boots up.
-1. connect the serial to USB adapter to you computer. 
-Pay special attention to the cross-over of the TX/RX pair (TX connects to RX and vice versa). 
-
-2. Start the esphome-flasher tool and select the COM port to use. Then click on "View logs".
-
-3. Connect the "GPIO0" to "GND". 
-
-4. plug in the lamp's power supply to boot up the lamp. 
-
-5. After booting, the lamp is in flash mode, release "GPIO0" from "GND"
+1. 将 USB 串口模块连接到电脑。
+特别注意 TX/RX 的交叉连接（TX 接 RX，反之亦然）。
+2. 打开 esphome-flasher 工具，选择使用的 COM 端口，然后点击 "View logs" (查看日志)。
+3. 将 "GPIO0" 连接到 "GND"。
+4. 插入台灯电源供电，启动台灯。
+5. 启动后，台灯即进入刷机模式，此时可以断开 "GPIO0" 与 "GND" 的连接。
 
 
-# Make a backup of the current firmware
-## Download esptool [https://github.com/espressif/esptool]
-1. Enter flash mode
-2. then start the esptool read_flash command:
+## 5. 备份当前（原厂）固件
+### 下载 esptool [https://github.com/espressif/esptool]
+1. 进入刷机模式。
+2. 然后运行 esptool `read_flash` 命令：
 
-```
-esptool-master
+```bash
 python3 esptool.py -p /dev/ttyUSB0 read_flash 0x0 0x400000 original-firmware.bin
 ```
 
 
-# Restore the backed up firmware
-1. Enter flash mode
-2. then start the esptool write_flash command:
-```
-python3 esptool.py --chip esp32 --port COM3 --baud 115200 write_flash 0x00 original-firmware.bin
+## 6. 还原备份的固件
+1. 进入刷机模式。
+2. 然后运行 esptool `write_flash` 命令：
+```bash
+python3 esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 115200 write_flash 0x00 original-firmware.bin
 ```
 
-```
+示例输出：
+```text
 python3 esptool.py -p /dev/ttyUSB0 read_flash 0x0 0x400000 original-firmware.bin
 esptool.py v4.5-dev
 Serial port /dev/ttyUSB0
@@ -78,50 +74,16 @@ Read 4194304 bytes at 0x00000000 in 394.5 seconds (85.1 kbit/s)...
 Hard resetting via RTS pin...
 ```
 
-# Flash new ESPHome firmware
-## By esphome [Works well]
-1. Enter flash mode
-2. then start the esphome run command:
-```
+## 7. 刷写新的 ESPHome 固件
+
+### 使用 esphome 命令 [推荐，工作良好]
+1. 进入刷机模式。
+2. 然后运行 esphome `run` 命令：
+```bash
 esphome run device.yaml
 ```
-3. After flashing
-power down the lamp, disconnect GPIO0 from GND and reconnect the power to boot into the new ESPHome firmware.
-
-
-
-## By esphome-flasher [Not try]
-Install
-```
-pip3 install -U \
-    -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-22.04 \
-    wxPython
-    
-pip3 install esphomeflasher
-
-esphomeflasher
-```
-
-
-
-## By CLI [Not try]
-```
-python3 esptool.py --chip esp32  -p /dev/ttyUSB0 --baud 115200 \
-    write_flash -z --flash_mode dout --flash_freq 40m --flash_size detect \
-    0x1000 bootloader_dout_40m.bin \
-    0x8000 partitions.bin \
-    0xe000 boot_app0.bin \
-    0x10000 firmware.bin
-```
-
-
-The required .bin files can be found in the following locations:
-```
-bootloader_dout_40m.bin: from arduino-esp32 package in tools/sdk/bin/
-partitions.bin: from <config dir>/<device name>/.pioenvs/<device name>/partitions.bin
-boot_app0.bin: from arduino-esp32 package in tools/partitions/
-firmware.bin: from <config dir>/<device name>/.pioenvs/<device name>/firmware.bin
-```
+3. 刷机完成后
+断开台灯电源，将 GPIO0 与 GND 断开连接，然后重新接通电源以启动新的 ESPHome 固件。
 
 
 

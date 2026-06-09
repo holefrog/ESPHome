@@ -1,0 +1,76 @@
+# Source: https://gist.github.com/Snipercaine/f3908a051fd79e6d7d7b765152666c2a
+
+esphome:
+  name: garage
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Garage Control Hotspot"
+    password: "jEvC7RTUNb7X"
+
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
+
+
+# Enable logging
+logger:
+
+
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO14
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Garage Door Sensor"
+    device_class: garage_door
+    
+    
+  - platform: template
+    name: "Equinox"
+    icon: "mdi:car"
+    device_class: presence
+    lambda: |-
+      if (id(uss_garage).state < 1.0) {
+        // car is in the garage
+        return true;
+      } else {
+        // no car
+        return false;
+      }   
+      
+switch:
+  - platform: gpio
+    pin: GPIO12
+    id: relay
+  - platform: template
+    icon: "mdi:arrow-up-down-bold-outline"
+    name: "Garage Control"
+    turn_on_action:
+    - switch.turn_on: relay
+    - delay: 500ms
+    - switch.turn_off: relay
+
+
+sensor:
+  - platform: ultrasonic
+    id: uss_garage
+    trigger_pin: GPIO05
+    echo_pin: GPIO04
+    name: "Car detector"
+    update_interval: 60s
+    filters:
+      filter_out: nan
+    timeout: 9m
