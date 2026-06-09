@@ -83,12 +83,28 @@ source .venv/bin/activate
 
 ### 编译和刷机 (首次 USB 刷入)
 对于全新设备，首次刷机需要通过 USB 串口连接电脑：
+
+1. **基本命令示例**：
 ```bash
 # 编译并选择 USB 端口刷入背光画框
 esphome run backlit_frame/config/backlit_frame.yaml --device /dev/ttyUSB0
 
 # 编译并选择 USB 端口刷入床头灯
 esphome run bedside_lamp/config/bedside-lamp.yaml
+```
+
+2. **Verify yaml**
+```bash
+yamllint esp32-cam.yaml
+```
+
+3. **Enter flash mode, then start the esphome run command:**
+```bash
+esphome run esp32-cam.yaml --device 192.168.50.144
+
+esphome upload esp32-cam.yaml --device 192.168.50.144
+
+esphome logs esp32-cam.yaml --device 192.168.50.144
 ```
 
 ### 无线 OTA 升级 (Over-The-Air)
