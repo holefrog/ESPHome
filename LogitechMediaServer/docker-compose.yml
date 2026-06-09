@@ -1,0 +1,27 @@
+version: '3'
+services:
+  logitech_media_server:
+    image: lmscommunity/logitechmediaserver:latest
+    ports:
+      - "3483:3483/tcp"
+      - "9000:9000/tcp"
+      - "9090:9090/tcp"
+      - "3483:3483/udp"
+
+    environment:
+      - TZ=PST8PDT7
+
+    volumes:
+      - "/share/CACHEDEV2_DATA/Media/Audio/Popular:/music"
+      - "/share/CACHEDEV2_DATA/Media/Audio/Popular/china_remote.ir:/lms/IR/china_remote.ir"
+      - "/share/CACHEDEV2_DATA/Media/Audio/Popular/Huayu-RM-L1162.ir:/lms/IR/Huayu-RM-L1162.ir"
+
+    networks:
+      - myNetwork
+      
+    restart: always
+    
+
+networks:
+  myNetwork:
+    driver: bridge

@@ -1,0 +1,263 @@
+[
+    {
+        "Id": "c0c7a08e95b6c224ca9e5cd7986b0ca3c3ce0127105666381c4d4015dc6ba5ad",
+        "Created": "2023-12-14T03:50:57.906177318Z",
+        "Path": "start-container",
+        "Args": [],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 137,
+            "Error": "",
+            "StartedAt": "2023-12-14T03:50:58.721208481Z",
+            "FinishedAt": "2023-12-14T03:59:42.92467308Z"
+        },
+        "Image": "sha256:546a8aac698cbab4d6ddecbefc9f90aa9f551675a4b80af14e09c269f0e7bb22",
+        "ResolvConfPath": "/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/containers/c0c7a08e95b6c224ca9e5cd7986b0ca3c3ce0127105666381c4d4015dc6ba5ad/resolv.conf",
+        "HostnamePath": "/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/containers/c0c7a08e95b6c224ca9e5cd7986b0ca3c3ce0127105666381c4d4015dc6ba5ad/hostname",
+        "HostsPath": "/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/containers/c0c7a08e95b6c224ca9e5cd7986b0ca3c3ce0127105666381c4d4015dc6ba5ad/hosts",
+        "LogPath": "/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/containers/c0c7a08e95b6c224ca9e5cd7986b0ca3c3ce0127105666381c4d4015dc6ba5ad/c0c7a08e95b6c224ca9e5cd7986b0ca3c3ce0127105666381c4d4015dc6ba5ad-json.log",
+        "Name": "/exciting_poincare",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "/etc/localtime:/etc/localtime:ro"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {
+                    "max-file": "10",
+                    "max-size": "10m"
+                }
+            },
+            "NetworkMode": "default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": [
+                {
+                    "Name": "nofile",
+                    "Hard": 65535,
+                    "Soft": 65535
+                }
+            ],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/887fea3fd6158f93f786ded3af36a61a4690b88c85d3459efb5508a460f10315-init/diff:/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/9a207da6f9a4f61656e92d3c51b735836657dd2357d0af350c5f610fe34af7a0/diff:/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/544712df35a4e4b707d4e2cbc69d0e85ab3df7c879223271e51440a5a63f35a3/diff:/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/44b287880615922b562b956f46a1b2e48966da239e0c040506416fde50fdbdb7/diff:/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/0d49c79b842d599c8d0738e060fcf214bdcaeb8073f8bc14d6b793c120cf6c2d/diff:/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/e814f317014f68c978943cd50c820cb748658b75419daa468741239629af2798/diff:/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/33ec7d40a9c4631115c36f30c347ab4c38a0683ac5aa813fda178bb92470a5f7/diff:/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/db0fe8b3c504939064c087b6d016b77d974910c2ca6079161a24c5913c4c08f5/diff:/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/239fc5bc686f4f428f5f41caa6829f5706b8380acdb6bb424abbca048bb3c9d3/diff",
+                "MergedDir": "/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/887fea3fd6158f93f786ded3af36a61a4690b88c85d3459efb5508a460f10315/merged",
+                "UpperDir": "/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/887fea3fd6158f93f786ded3af36a61a4690b88c85d3459efb5508a460f10315/diff",
+                "WorkDir": "/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/overlay2/887fea3fd6158f93f786ded3af36a61a4690b88c85d3459efb5508a460f10315/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "ed0c0d16cf00087812dc8cec0c068c0aa211f6f15e2e0c7a7a1a1b3895ca99b9",
+                "Source": "/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/volumes/ed0c0d16cf00087812dc8cec0c068c0aa211f6f15e2e0c7a7a1a1b3895ca99b9/_data",
+                "Destination": "/config",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            },
+            {
+                "Type": "volume",
+                "Name": "23c8e27641f0fb4f80288f32e4b283c1725e511fb079358ac2c281239a3c8268",
+                "Source": "/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/volumes/23c8e27641f0fb4f80288f32e4b283c1725e511fb079358ac2c281239a3c8268/_data",
+                "Destination": "/music",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            },
+            {
+                "Type": "volume",
+                "Name": "66493166b534487898d57ce7a3dc864d2bd1f0e1707fdf7f66288e2984665545",
+                "Source": "/share/CACHEDEV1_DATA/Container/container-station-data/lib/docker/volumes/66493166b534487898d57ce7a3dc864d2bd1f0e1707fdf7f66288e2984665545/_data",
+                "Destination": "/playlist",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            },
+            {
+                "Type": "bind",
+                "Source": "/etc/localtime",
+                "Destination": "/etc/localtime",
+                "Mode": "ro",
+                "RW": false,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "c0c7a08e95b6",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "ExposedPorts": {
+                "3483/tcp": {},
+                "3483/udp": {},
+                "9000/tcp": {},
+                "9090/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "DEBIAN_FRONTEND=noninteractive",
+                "LC_ALL=C.UTF-8",
+                "LANG=en_US.UTF-8",
+                "LANGUAGE=en_US.UTF-8",
+                "PUID=99",
+                "PGID=100",
+                "HTTP_PORT=9000"
+            ],
+            "Cmd": null,
+            "Image": "lmscommunity/logitechmediaserver:latest",
+            "Volumes": {
+                "/config": {},
+                "/music": {},
+                "/playlist": {}
+            },
+            "WorkingDir": "/config",
+            "Entrypoint": [
+                "start-container"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "04e6db56c75b035285d6331cc870b3571231c991060fef660cee77e7ee2ba801",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "/var/run/docker/netns/04e6db56c75b",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "24850dd465c097956a5603d4ded4857962279843d3b9c3ede4358ebb349191b0",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]

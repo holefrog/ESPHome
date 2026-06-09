@@ -1,0 +1,133 @@
+substitutions:
+  hostname: 'cam-1'
+
+  th_name_1: 'T&H 1'
+  th_mac_1: 'A4:C1:38:BC:AA:14'
+   
+  
+esphome:
+  name: $hostname
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+
+# Enable logging
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Garage Control Hotspot"
+    password: "jEvC7RTUNb7X"
+
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
+
+
+# Enable logging
+logger:
+
+
+captive_portal:
+    
+    
+esp32_camera:
+  external_clock:
+    pin: GPIO0
+    frequency: 10MHz
+
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+  power_down_pin: GPIO32
+
+
+  # Image settings
+  name: $hostname
+  resolution: 800x600
+  jpeg_quality: 10
+  idle_framerate: 0.1fps
+  
+
+
+output:
+# White LED
+  - platform: ledc
+    channel: 2
+    pin: GPIO4
+    id: espCamLED
+
+#red statuslight
+  - platform: gpio
+    pin:
+      number: GPIO33
+      inverted: True
+    id: gpio_33
+
+
+light:
+  - platform: monochromatic
+    output: espCamLED
+    name: '$hostname Light'
+
+  - platform: binary
+    output: gpio_33
+    name: '$hostname Red'
+
+
+switch:
+  - platform: restart
+    name: '$hostname restart'
+
+binary_sensor:
+  - platform: status
+    name: '$hostname status'
+    
+
+
+    
+# Bluetooth Proxy
+esp32_ble_tracker:
+  scan_parameters:
+    interval: 1100ms
+    window: 1100ms
+    active: true
+
+bluetooth_proxy:
+  active: true
+  
+
+
+# ESP32 Bluetooth Low Energy Tracker Hub
+sensor:
+    # camera WIFI
+  - platform: wifi_signal
+    name: '$hostname WiFi Signal'
+
+
+    # T&H 1
+  - platform: pvvx_mithermometer
+    mac_address: $th_mac_1
+    temperature:
+      name: '$th_name_1 Temperature'
+    humidity:
+      name: '$th_name_1 Humidity'
+    battery_level:
+      name: '$th_name_1 Battery-Level'
+    battery_voltage:
+      name: '$th_name_1 Battery-Voltage'
+    signal_strength:
+      name: '$th_name_1 Signal'
