@@ -48,25 +48,25 @@ esp32_camera:
 
 output:
   # White LED
-  - platform: ledc
-    channel: 2
-    pin: GPIO4
-    id: espCamLED
+  - platform: gpio
+    pin:
+      number: GPIO4
+    id: white_led
 
   # Red status light
   - platform: gpio
     pin:
       number: GPIO33
       inverted: true
-    id: gpio_33
+    id: red_led
 
 light:
   - platform: monochromatic
-    output: espCamLED
+    output: white_led
     name: '$hostname White LED'
 
   - platform: binary
-    output: gpio_33
+    output: red_led
     name: '$hostname Red LED'
 
 switch:
@@ -74,8 +74,8 @@ switch:
   - platform: gpio
     pin:
       number: 13
-    id: GPIO13
-    name: '$hostname LED Switch'
+      id: transistor_base
+      name: '$hostname Transistor Base'
 
 binary_sensor:
   - platform: gpio
@@ -92,7 +92,7 @@ binary_sensor:
             condition:
               binary_sensor.is_on: door_sensor
             then:
-              - switch.turn_on: GPIO13
+              - switch.turn_on: transistor_base
             else:
-              - switch.turn_off: GPIO13
+              - switch.turn_off: transistor_base
 
