@@ -36,22 +36,16 @@ ESPHome/
 
 ### 安装 ESPHome CLI
 如果你需要在本地主机上编译固件并刷机，需要先安装 ESPHome。
-推荐在项目目录中使用 Python 虚拟环境（`venv`）：
+推荐在项目目录中使用 Python 虚拟环境（`venv`）。本项目提供了一个自动化的环境配置脚本 `init_workspace.sh`，它会自动安装系统依赖、创建 Python 虚拟环境并安装 ESPHome 及所需依赖，同时还会配置 USB 硬件刷机权限：
+
 ```bash
-# 1. 安装 venv 支持 (如果尚未安装)
-sudo apt install python3-venv
-
-# 2. 创建并激活项目虚拟环境
-python3 -m venv .venv
-source .venv/bin/activate
-
-# 3. 安装 esphome
-pip install esphome
-
-# 4. 验证安装
-esphome version
+# 运行工作区初始化脚本
+./init_workspace.sh
 ```
-之后每次打开新的终端并使用 `esphome` 前，需要先在仓库根目录运行：
+
+*(注意：脚本运行后可能会提示需要重新登录，以使 USB 权限生效)*
+
+之后每次打开新的终端并使用 `esphome` 前，需要先在仓库根目录运行以下命令以激活虚拟环境：
 ```bash
 source .venv/bin/activate
 ```
