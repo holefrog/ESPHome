@@ -28,8 +28,6 @@ switch:
     name: '${friendly_name} Light'
     inverted: true
 
-  - platform: restart
-    name: '${friendly_name} Restart'
 
 script:
   - id: pir_timer

@@ -1,7 +1,7 @@
 ---
 substitutions:
   hostname: 'stair-closet-camera'
-  friendly_name: '$hostname'
+  friendly_name: 'Stair Closet Camera'
 
 esphome:
   name: $hostname
@@ -63,16 +63,13 @@ output:
 light:
   - platform: monochromatic
     output: espCamLED
-    name: '$hostname Light'
+    name: '$hostname White LED'
 
   - platform: binary
     output: gpio_33
-    name: '$hostname Red'
+    name: '$hostname Red LED'
 
 switch:
-  - platform: restart
-    name: '$hostname restart'
-
   # Transistor Base
   - platform: gpio
     pin:

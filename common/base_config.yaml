@@ -15,3 +15,8 @@ ota:
 
 # Enable logging
 logger:
+
+# Common restart switch for devices
+switch:
+  - platform: restart
+    name: '${friendly_name} Restart'
