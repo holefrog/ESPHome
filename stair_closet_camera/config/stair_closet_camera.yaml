@@ -1,6 +1,7 @@
 ---
 substitutions:
-  hostname: 'camera'
+  hostname: 'stair-closet-camera'
+  friendly_name: '$hostname'
 
 esphome:
   name: $hostname
@@ -11,31 +12,10 @@ esp32:
   framework:
     type: arduino
 
-# Enable logging
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
-  use_address: '$hostname.local'
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: 'hotspot.$hostname'
-    password: "jEvC7RTUNb7X"
-
-# Enable Home Assistant API
-api:
-  encryption:
-    key: "KytqgkyuUV5z/ofXcgfC0e+7cEajkDI+yhw1GA6N5Ro="
-
-ota:
-  - platform: esphome
-    password: !secret ota_password
-
-
-# Enable logging
-logger:
-
-captive_portal:
+packages:
+  base_config: !include ../../common/base_config.yaml
+  wifi_fallback: !include ../../common/wifi_fallback.yaml
+  common_sensors: !include ../../common/common_sensors.yaml
 
 esp32_camera:
   external_clock:
@@ -119,10 +99,3 @@ binary_sensor:
             else:
               - switch.turn_off: GPIO13
 
-  - platform: status
-    name: '$hostname status'
-
-sensor:
-  # Camera WIFI
-  - platform: wifi_signal
-    name: '$hostname WiFi Signal'
