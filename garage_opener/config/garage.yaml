@@ -1,42 +1,31 @@
-# Source: https://gist.github.com/Snipercaine/f3908a051fd79e6d7d7b765152666c2a
+substitutions:
+  name: 'garage-opener'
+  friendly_name: 'Garage Opener'
 
 esphome:
-  name: garage
-  platform: ESP8266
+  name: '${name}'
+  name_add_mac_suffix: true
+
+packages:
+  base_config: !include ../../common/base_config.yaml
+  wifi_fallback: !include ../../common/wifi_fallback.yaml
+  common_sensors: !include ../../common/common_sensors.yaml
+
+esp8266:
   board: esp01_1m
-
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "Garage Control Hotspot"
-    password: "jEvC7RTUNb7X"
-
-
-# Enable Home Assistant API
-api:
-  password: !secret api_password
-
-ota:
-  password: !secret ota_password
-
-
-# Enable logging
-logger:
-
-
+  framework:
+    version: recommended
 
 binary_sensor:
   - platform: gpio
     pin:
       number: GPIO14
-      mode: INPUT_PULLUP
-      inverted: True
-    name: "Garage Door Sensor"
+      mode:
+        input: true
+        pullup: true
+    inverted: true
+    name: "${friendly_name} Door Sensor"
     device_class: garage_door
-    
     
   - platform: template
     name: "Equinox"
@@ -57,19 +46,18 @@ switch:
     id: relay
   - platform: template
     icon: "mdi:arrow-up-down-bold-outline"
-    name: "Garage Control"
+    name: "${friendly_name} Door Opener"
     turn_on_action:
     - switch.turn_on: relay
     - delay: 500ms
     - switch.turn_off: relay
-
 
 sensor:
   - platform: ultrasonic
     id: uss_garage
     trigger_pin: GPIO05
     echo_pin: GPIO04
-    name: "Car detector"
+    name: "${friendly_name} Car Detector"
     update_interval: 60s
     filters:
       filter_out: nan
