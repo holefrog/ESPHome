@@ -37,8 +37,8 @@ esp32_camera:
 
   # Image settings
   name: '$name Camera'
-  resolution: 640X480
-  jpeg_quality: 20  # best 10 to poorest 63
+  resolution: 800X600
+  jpeg_quality: 15  # best 10 to poorest 63
   max_framerate: 15.0fps
   idle_framerate: 1.0fps
   vertical_flip: false
