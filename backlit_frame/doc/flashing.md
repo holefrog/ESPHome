@@ -43,7 +43,7 @@ sudo picocom -b 115200 /dev/ttyUSB0
 
 # After flashing
 unplug the adapter,
-release the GIO0
+release pin IO0
 
 
 
