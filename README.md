@@ -85,7 +85,7 @@ source .venv/bin/activate
 对于全新设备，首次刷机需要通过 USB 串口连接电脑：
 ```bash
 # 编译并选择 USB 端口刷入背光画框
-esphome run backlit_frame/config/backlit_frame.yaml
+esphome run backlit_frame/config/backlit_frame.yaml --device /dev/ttyUSB0
 
 # 编译并选择 USB 端口刷入床头灯
 esphome run bedside_lamp/config/bedside-lamp.yaml

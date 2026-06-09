@@ -26,25 +26,36 @@ You can find what port is used by the adapter by running dmesg after plugging in
 ````
 sudo putty /dev/ttyUSB0 -serial -sercfg 115200,8,n,1,N 
 ```
+Or
+```
+sudo picocom -b 115200 /dev/ttyUSB0
+```
 
 
 # Enter flash mode
+0. Connect pin IO0 to pin GND
+
 1. connect the PCB (GND, RX and TX) to USB adapter to you computer. 
 
 2. connect the USB adapter to you computer. 
 
-3. Connect GIO0 to GND
-
-After flashing, release the GIO0.
 
 
+# After flashing
+unplug the adapter,
+release the GIO0
 
+
+
+# Add user to dialout group
+
+```
+sudo usermod -a -G dialout david
+```
 
 # Upload firmware
 ```
 esphome upload 8266-01s.yaml --device /dev/ttyUSB0
-esphome upload 8266-01s.yaml --device 192.168.50.172
-esphome upload 8266-01s.yaml --device 192.168.50.226
-esphome upload 8266-01s.yaml --device 192.168.50.106
+esphome upload 8266-01s.yaml --device 192.168.50.54
 ```
 
