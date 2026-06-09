@@ -23,12 +23,12 @@ binary_sensor:
       mode:
         input: true
         pullup: true
-    inverted: true
+      inverted: true
     name: "${friendly_name} Door Sensor"
     device_class: garage_door
     
   - platform: template
-    name: "Equinox"
+    name: "Car Presence"
     icon: "mdi:car"
     device_class: presence
     lambda: |-
